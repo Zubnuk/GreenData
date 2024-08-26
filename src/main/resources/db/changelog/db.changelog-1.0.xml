@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Создание таблицы bank -->
+    <changeSet id="1" author="author">
+        <!-- Удалите создание таблицы, если она уже существует -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="bank"/>
+            </not>
+        </preConditions>
+        <createTable tableName="bank">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(45)">
+                <constraints unique="true"/>
+            </column>
+            <column name="BIK" type="varchar(45)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы organizational_legal_form -->
+    <changeSet id="2" author="author">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="organizational_legal_form"/>
+            </not>
+        </preConditions>
+        <createTable tableName="organizational_legal_form">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(45)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы client -->
+    <changeSet id="3" author="author">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="client"/>
+            </not>
+        </preConditions>
+        <createTable tableName="client">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="address" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="idOrganizational" type="varchar(255)"/>
+            <column name="short_name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы deposit -->
+    <changeSet id="4" author="author">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="deposit"/>
+            </not>
+        </preConditions>
+        <createTable tableName="deposit">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="idClient" type="int"/>
+            <column name="idBank" type="int"/>
+            <column name="date" type="date"/>
+            <column name="percent" type="double"/>
+            <column name="months" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="deposit"
+                                 baseColumnNames="idClient"
+                                 constraintName="fk_deposit_client"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="deposit"
+                                 baseColumnNames="idBank"
+                                 constraintName="fk_deposit_bank"
+                                 referencedTableName="bank"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>
