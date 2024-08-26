@@ -41,6 +41,6 @@ public class OrganizationalLegalFormService implements IOrganizationalLegalFormS
 
     }
     public boolean organizationalLegalFormExists(int id) {
-        return repository.existsById(id);  // Используем стандартный метод репозитория для проверки существования
+        return repository.existsById(id);
     }
 }

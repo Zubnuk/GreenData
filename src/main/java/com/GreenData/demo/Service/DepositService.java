@@ -49,7 +49,7 @@ public class DepositService implements IDepositService {
     }
     @Override
     public List<Deposit> filterDeposits(Integer clientId, Integer bankId, Date openDate, Float percent, Integer months, String sortBy, String order) {
-        // Логика для фильтрации и сортировки
+
         Specification<Deposit> spec = Specification.where(null);
 
         if (clientId != null && clientId > 0) {
@@ -72,7 +72,7 @@ public class DepositService implements IDepositService {
         return repository.findAll(spec, sort);
     }
     public boolean depositExists(int id) {
-        return repository.existsById(id);  // Используем стандартный метод репозитория для проверки существования
+        return repository.existsById(id);
     }
 
 }

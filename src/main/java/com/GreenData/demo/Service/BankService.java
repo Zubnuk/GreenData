@@ -51,7 +51,7 @@ public class BankService implements IBankService {
     }
     @Override
     public List<Bank> filterBanks(String name, String bik, String sortBy, String order) {
-        // Логика для фильтрации и сортировки
+
         Specification<Bank> spec = Specification.where(null);
 
         if (name != null && !name.isEmpty()) {
@@ -65,7 +65,7 @@ public class BankService implements IBankService {
         return repository.findAll(spec, sort);
     }
     public boolean bankExists(int id) {
-        return repository.existsById(id);  // Используем стандартный метод репозитория для проверки существования
+        return repository.existsById(id);
     }
 
 }

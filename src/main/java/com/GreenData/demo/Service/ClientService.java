@@ -50,7 +50,7 @@ public class ClientService implements IClientService {
 
     @Override
     public List<Client> filterClients(String name, String shortName, String address, int organizationalLegalFormId, String sortBy, String order) {
-        // Логика для фильтрации и сортировки
+
         Specification<Client> spec = Specification.where(null);
 
         if (name != null && !name.isEmpty()) {
@@ -70,7 +70,7 @@ public class ClientService implements IClientService {
         return repository.findAll(spec, sort);
     }
     public boolean clientExists(int id) {
-        return repository.existsById(id);  // Используем стандартный метод репозитория для проверки существования
+        return repository.existsById(id);
     }
 
 }

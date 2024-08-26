@@ -20,22 +20,22 @@ public class OrganizationalLegalForm {
 
     }
 
-    // Геттер для id
+
     public int getId() {
         return id;
     }
 
-    // Сеттер для id
+
     public void setId(int id) {
         this.id = id;
     }
 
-    // Геттер для name
+
     public String getName() {
         return name;
     }
 
-    // Сеттер для name
+
     public void setName(String name) {
         this.name = name;
     }
