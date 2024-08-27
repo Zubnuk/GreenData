@@ -82,6 +82,7 @@ class BankControllerTest {
 
     @Test
     void testDeleteBank() {
+        when(service.bankExists(1)).thenReturn(true);
         doNothing().when(service).deleteBank(anyInt());
 
         ResponseEntity<Void> response = controller.deleteBank(1);
@@ -89,6 +90,7 @@ class BankControllerTest {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         verify(service, times(1)).deleteBank(1);
     }
+
 
     @Test
     void testFilterBanks() {

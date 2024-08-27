@@ -101,12 +101,15 @@ class DepositControllerTest {
 
     @Test
     void testDeleteDeposit() {
+        when(service.depositExists(1)).thenReturn(true);
         doNothing().when(service).deleteDeposit(anyInt());
 
         ResponseEntity<Void> response = controller.deleteDeposit(1);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        verify(service, times(1)).deleteDeposit(1);
     }
+
 
     @Test
     void testFilterDeposits() {

@@ -80,10 +80,13 @@ class OrganizationalLegalFormControllerTest {
 
     @Test
     void testDeleteOrganizationalLegalForm() {
+        when(service.organizationalLegalFormExists(1)).thenReturn(true);  // Форма существует
         doNothing().when(service).deleteOrganizationalLegalForm(anyInt());
 
         ResponseEntity<Void> response = controller.deleteOrganizationalLegalForm(1);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        verify(service, times(1)).deleteOrganizationalLegalForm(1);
     }
+
 }

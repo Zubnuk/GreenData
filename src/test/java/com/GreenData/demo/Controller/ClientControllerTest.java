@@ -81,6 +81,7 @@ class ClientControllerTest {
 
     @Test
     void testDeleteClient() {
+        when(service.clientExists(1)).thenReturn(true);
         doNothing().when(service).deleteClient(anyInt());
 
         ResponseEntity<Object> response = controller.deleteClient(1);
@@ -88,6 +89,7 @@ class ClientControllerTest {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         verify(service, times(1)).deleteClient(1);
     }
+
 
     @Test
     void testFilterClients() {
